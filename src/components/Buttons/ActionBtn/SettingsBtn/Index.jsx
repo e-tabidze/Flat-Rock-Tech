@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SettingsIcon from "../../../../assets/Icons/Actions/settings.svg";
 
-const Index = ({ id, firstName, lastName, email }) => {
+const Index = ({ id, firstName, lastName, email, role }) => {
   return (
     <Link
       to={{
@@ -12,6 +12,7 @@ const Index = ({ id, firstName, lastName, email }) => {
           lastName: lastName,
           firstName: firstName,
           email: email,
+          role: role,
         },
       }}
     >

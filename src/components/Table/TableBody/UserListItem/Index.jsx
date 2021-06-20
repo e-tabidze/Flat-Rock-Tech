@@ -65,6 +65,7 @@ export default function Index({
           lastName={item.lastName}
           firstName={item.firstName}
           email={item.email}
+          role={item.isAdmin}
         />
         <DeleteBtn setItemToDelete={setItemToDelete} item={item} />
       </td>
