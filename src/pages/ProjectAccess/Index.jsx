@@ -9,7 +9,7 @@ import DeleteModal from "../../components/Modal/DeleteModal/Index";
 import AddModal from "../../components/Modal/AddModal/Index";
 
 import AddBtn from "../../components/Buttons/AddBtn/Index";
-
+import classes from "./styles.module.scss";
 const Index = ({ dataIsSet }) => {
   const [userData, setUserData] = useState([]);
   const [filteredUserData, setFilteredUserData] = useState([]);
@@ -34,14 +34,17 @@ const Index = ({ dataIsSet }) => {
   };
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <span className="page-name">Project Access</span>
+    <div className={classes.container}>
+      <div className={classes.container_header}>
+        <span className={classes.container_pagename}>Project Access</span>
         <Search data={userData} setFilteredUserData={setFilteredUserData} />
       </div>
-      <div className="page-body">
-        <AddBtn handleClick={toggleInviteModal} />
-        <table className="user-table">
+      <div className={classes.container_pagebody}>
+        <AddBtn
+          handleClick={toggleInviteModal}
+          className={classes.container_addbtn}
+        />
+        <table className={classes.container_usertable}>
           <TableHeader
             userData={filteredUserData}
             setFilteredUserData={setFilteredUserData}
@@ -54,7 +57,7 @@ const Index = ({ dataIsSet }) => {
           />
         </table>
       </div>
-      <div className="modals-container">
+      <div className={classes.container_modal}>
         {itemToDelete && (
           <DeleteModal
             userData={userData}

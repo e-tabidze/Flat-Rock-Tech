@@ -1,5 +1,5 @@
 import React from "react";
-
+import classes from "./styles.module.scss";
 import ProfileIconActive from "../../../../assets/Icons/General/profile-active.svg";
 import ProfileIconInactive from "../../../../assets/Icons/General/profile-inactive.svg";
 
@@ -10,7 +10,12 @@ import Switcher from "../../../Switcher/Index";
 import SettingsBtn from "../../../Buttons/ActionBtn/SettingsBtn/Index";
 import DeleteBtn from "../../../Buttons/ActionBtn/DeleteBtn/Index";
 
-export default function Index({ item, setFilteredUserData, userData, setItemToDelete }) {
+export default function Index({
+  item,
+  setFilteredUserData,
+  userData,
+  setItemToDelete,
+}) {
   const handleProfileActiveClick = () => {
     let newData = [...userData];
     newData[newData.indexof(item)].isActive = !item.isActive;
@@ -21,24 +26,27 @@ export default function Index({ item, setFilteredUserData, userData, setItemToDe
     <tr>
       <td>
         <img
+          className={classes.container_img}
           src={item.isActive ? ProfileIconActive : ProfileIconInactive}
           alt=""
         />
       </td>
       <td>
-        <div className="table-cell_info">
-          <span className="cell-info_fullName">{`${item.firstName} ${item.lastName}`}</span>
-          <span className="cell-info_email">{item.email}</span>
+        <div className={classes.container_info}>
+          <span
+            className={classes.container_info_fullname}
+          >{`${item.firstName} ${item.lastName}`}</span>
+          <span className={classes.container_info_email}>{item.email}</span>
         </div>
       </td>
       <td>
         {item.isAdmin ? (
-          <div>
+          <div className={classes.container_roleinfo}>
             <img
               src={item.isActive ? UserAdminActive : UserAdminInactive}
               alt=""
-            />{" "}
-            <span>Admin</span>{" "}
+            />
+            <span>Admin</span>
           </div>
         ) : (
           <span>User</span>
