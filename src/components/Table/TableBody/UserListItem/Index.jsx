@@ -52,14 +52,19 @@ export default function Index({
           <span>User</span>
         )}
       </td>
-      <td className={classes.container_switcher} >
+      <td className={classes.container_switcher}>
         <Switcher
           handleClick={handleProfileActiveClick}
           isActive={item.isActive}
         />
       </td>
       <td>
-        <SettingsBtn id={item.id} />
+        <SettingsBtn
+          id={item.id}
+          lastName={item.lastName}
+          firstName={item.firstName}
+          email={item.email}
+        />
         <DeleteBtn setItemToDelete={setItemToDelete} item={item} />
       </td>
     </tr>

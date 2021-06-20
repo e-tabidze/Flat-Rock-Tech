@@ -1,10 +1,49 @@
 .container {
-  background-color: #f3f3f3;
+  &_header {
+    background-color: #f3f3f3;
+    position: relative;
+    &_headerText {
+      font-size: 36px;
+      padding: 80px;
+      padding-left: 276px;
+      font-weight: 700;
+      text-align: left;
+    }
+    &_settings {
+      background-color: #c6c6c6;
+      padding: 20px;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: 180px;
+      top: 155px;
+    }
+  }
 
-  &_headerText {
-    font-size: 36px;
-    padding: 80px;
-    font-weight: 700;
-    text-align: left;
+  &_content {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    &_fcolumn {
+      &_img {
+        height: 200px;
+        width: 200px;
+      }
+      &_uploadtext {
+        color: #b0acac;
+        font-size: 14px;
+      }
+      &_email {
+        font-size: 14px;
+      }
+    }
+    &_scolumn {
+      header {
+        font-size: 36px;
+      }
+    }
   }
 }
