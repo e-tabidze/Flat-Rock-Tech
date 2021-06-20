@@ -18,7 +18,8 @@ export default function Index({
 }) {
   const handleProfileActiveClick = () => {
     let newData = [...userData];
-    newData[newData.indexof(item)].isActive = !item.isActive;
+    console.log(userData, newData, item);
+    newData[newData.indexOf(item)].isActive = !item.isActive;
     setFilteredUserData(newData);
     localStorage.setItem("userData", JSON.stringify(newData));
   };
