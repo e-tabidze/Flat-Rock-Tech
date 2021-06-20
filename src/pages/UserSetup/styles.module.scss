@@ -1,0 +1,10 @@
+.container {
+  background-color: #f3f3f3;
+
+  &_headerText {
+    font-size: 36px;
+    padding: 80px;
+    font-weight: 700;
+    text-align: left;
+  }
+}

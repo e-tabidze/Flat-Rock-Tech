@@ -52,7 +52,7 @@ export default function Index({
           <span>User</span>
         )}
       </td>
-      <td>
+      <td className={classes.container_switcher} >
         <Switcher
           handleClick={handleProfileActiveClick}
           isActive={item.isActive}
