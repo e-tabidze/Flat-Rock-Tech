@@ -1,7 +1,9 @@
 import React from "react";
-import classes from "./styles.module.scss";
+
 import ArrowDownActive from "../../../assets/Icons/Arrows/arrow_down-active.svg";
 import ArrowDownInactive from "../../../assets/Icons/Arrows/arrow_down-inactive.svg";
+
+import classes from "./styles.module.scss";
 
 export default function Index({ userData, setFilteredUserData }) {
   const handleSortByUser = () => {
@@ -32,22 +34,22 @@ export default function Index({ userData, setFilteredUserData }) {
   };
 
   return (
-    <thead>
+    <thead className={classes.tableHeader}>
       <tr>
-        <th>{/* Vacant Place */}</th>
-        <th onClick={() => handleSortByUser()}>
+        <th className={classes.tableHeader_col1}>{/* Vacant Place */}</th>
+        <th  className={classes.tableHeader_col2} onClick={() => handleSortByUser()} style={{textAlign: "left"}}>
           <span>USER</span>
           <img src={ArrowDownActive} alt="" />
         </th>
-        <th onClick={() => handleSortByRole()}>
+        <th  className={classes.tableHeader_col3} onClick={() => handleSortByRole()}>
           <span>ROLE</span>
           <img src={ArrowDownInactive} alt="" />
         </th>
-        <th onClick={() => handleSortByStatus()}>
+        <th  className={classes.tableHeader_col4} onClick={() => handleSortByStatus()}>
           <span>STATUS</span>
           <img src={ArrowDownInactive} alt="" />
         </th>
-        <th>
+        <th  className={classes.tableHeader_col5}>
           <span>ACTIONS</span>
         </th>
       </tr>

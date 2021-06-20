@@ -1,0 +1,24 @@
+.searchContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  border-bottom: 2px solid #707070;
+  opacity: 1;
+}
+
+.searchContainer_input {
+  border: none;
+  outline: none;
+  margin-right: 10px;
+  font-style: italic;
+}
+/*# sourceMappingURL=styles.module.css.map */

@@ -42,7 +42,6 @@ const Index = ({ dataIsSet }) => {
       <div className={classes.container_pagebody}>
         <AddBtn
           handleClick={toggleInviteModal}
-          className={classes.container_addbtn}
         />
         <table className={classes.container_usertable}>
           <TableHeader

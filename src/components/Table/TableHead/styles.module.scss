@@ -1,0 +1,39 @@
+.tableHeader {
+    th {
+        padding: 30px 0 0px 0;
+        text-align: center;
+        height: 21px;
+        font: normal normal 600 16px/21px Segoe UI;
+        letter-spacing: 0px;
+        color: #000000;
+        text-transform: uppercase;
+        opacity: 1;
+        span {
+            cursor: pointer;
+            margin-right: 10px;
+            transition: 300ms;
+            padding: 5px 10px 5px 10px;
+            border-radius: 5px;
+            &:hover{
+                background-color: rgb(206, 206, 206);
+                transition: 300ms;
+                color: #fff;
+            }
+         }
+    }
+    &_col1 {
+        width: 10%;
+    }
+    &_col2 {
+        width: 30%;
+    }
+    &_col3 {
+        width: 20%;
+    }
+    &_col4 {
+        width: 20%;
+    }
+    &_col5 {
+        width: 20%;
+    }
+}

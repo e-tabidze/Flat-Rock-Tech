@@ -9,5 +9,7 @@
   width: 50px;
   font-size: 36px;
   color: #ffff;
-  box-shadow: #305eca62 0px 2px 5px 1px;
+  -webkit-box-shadow: #305eca62 0px 2px 5px 1px;
+          box-shadow: #305eca62 0px 2px 5px 1px;
 }
+/*# sourceMappingURL=styles.module.css.map */

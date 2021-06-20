@@ -1,6 +1,7 @@
 import React from "react";
 
 import SearchIcon from "../../assets/Icons/Actions/search.svg";
+import classes from './styles.module.scss';
 
 const Index = ({ data, setFilteredUserData }) => {
 
@@ -15,9 +16,10 @@ const Index = ({ data, setFilteredUserData }) => {
   };
 
   return (
-    <div className="search-container">
+    <div className={classes.searchContainer}>
       <input
         type="text"
+        className={classes.searchContainer_input}
         placeholder="Type to filter the table"
         onChange={handleSearchChange}
       />
