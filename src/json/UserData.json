@@ -6,12 +6,30 @@
     "email": "danniel.blichman@testtask.com",
     "isAdmin": true,
     "isActive": true,
-    "permission Group 1": [
-      { "permission1": true, "id": 11 },
-      { "permission2": false, "id": 12 },
-      { "permission3": true, "id": 13 },
-      { "permission4": true, "id": 14 }
-    ]
+    "permissions" : [
+      {
+        "name": "Permission Group 1",
+        "items": [
+          { "isActive": true, "id": 11, "name": "Permission 11" },
+          { "isActive": false, "id": 12, "name": "Permission 12" },
+          { "isActive": true, "id": 13, "name": "Permission 13" },
+          { "isActive": true, "id": 14, "name": "Permission 14" }
+        ]
+      },
+      {
+        "name": "Permission Group 2",
+        "items": []
+      },
+      {
+        "name": "Permission Group 3",
+        "items": [
+          { "isActive": true, "id": 16, "name": "Permission 16" },
+          { "isActive": false, "id": 17, "name": "Permission 11" },
+          { "isActive": true, "id": 18, "name": "Permission 11" },
+          { "isActive": true, "id": 19, "name": "Permission 11" }
+        ]
+      }
+  ]
   },
   {
     "id": 2,
@@ -20,12 +38,30 @@
     "email": "margarette.jones@testtask.com",
     "isAdmin": false,
     "isActive": false,
-    "permission Group 1": [
-      { "permission1": true, "id": 21 },
-      { "permission2": false, "id": 22 },
-      { "permission3": true, "id": 23 },
-      { "permission4": true, "id": 24 }
-    ]
+    "permissions" : [
+      {
+        "name": "Permission Group 1",
+        "items": [
+          { "isActive": true, "id": 11, "name": "Permission 11" },
+          { "isActive": false, "id": 12, "name": "Permission 12" },
+          { "isActive": true, "id": 13, "name": "Permission 13" },
+          { "isActive": true, "id": 14, "name": "Permission 14" }
+        ]
+      },
+      {
+        "name": "Permission Group 2",
+        "items": []
+      },
+      {
+        "name": "Permission Group 3",
+        "items": [
+          { "isActive": true, "id": 16, "name": "Permission 16" },
+          { "isActive": false, "id": 17, "name": "Permission 11" },
+          { "isActive": true, "id": 18, "name": "Permission 11" },
+          { "isActive": true, "id": 19, "name": "Permission 11" }
+        ]
+      }
+  ]
   },
   {
     "id": 3,
@@ -34,12 +70,28 @@
     "email": "bethany.doe@testtask.com",
     "isAdmin": false,
     "isActive": true,
-    "permission Group 1": [
-      { "permission1": true, "id": 31 },
-      { "permission2": false, "id": 32 },
-      { "permission3": true, "id": 33 },
-      { "permission4": true, "id": 34 }
-    ]
+    "permissions" : [
+      {
+        "name": "Permission Group 1",
+        "items": [
+          { "isActive": true, "id": 11, "name": "Permission 11" },
+          { "isActive": true, "id": 13, "name": "Permission 11" },
+          { "isActive": true, "id": 14, "name": "Permission 11" }
+        ]
+      },
+      {
+        "name": "Permission Group 2",
+        "items": []
+      },
+      {
+        "name": "Permission Group 3",
+        "items": [
+          { "isActive": true, "id": 16, "name": "Permission 16" },
+          { "isActive": false, "id": 17, "name": "Permission 11" },
+          { "isActive": true, "id": 19, "name": "Permission 11" }
+        ]
+      }
+  ]
   },
   {
     "id": 4,
@@ -48,12 +100,27 @@
     "email": "samuel.jackson@testtask.com",
     "isAdmin": true,
     "isActive": false,
-    "permission Group 1": [
-      { "permission1": true, "id": 41 },
-      { "permission2": false, "id": 42 },
-      { "permission3": true, "id": 43 },
-      { "permission4": true, "id": 44 }
-    ]
+    "permissions" : [
+      {
+        "name": "Permission Group 1",
+        "items": [
+          { "isActive": true, "id": 11, "name": "Permission 11" },
+          { "isActive": true, "id": 13, "name": "Permission 11" },
+          { "isActive": true, "id": 14, "name": "Permission 11" }
+        ]
+      },
+      {
+        "name": "Permission Group 2",
+        "items": []
+      },
+      {
+        "name": "Permission Group 3",
+        "items": [
+          { "isActive": true, "id": 16, "name": "Permission 16" },
+          { "isActive": false, "id": 17, "name": "Permission 11" }
+        ]
+      }
+  ]
   },
   {
     "id": 5,
@@ -62,11 +129,26 @@
     "email": "persival.blinn@testtask.com",
     "isAdmin": false,
     "isActive": true,
-    "permission Group 1": [
-      { "permission1": true, "id": 51 },
-      { "permission2": false, "id": 52 },
-      { "permission3": true, "id": 53 },
-      { "permission4": true, "id": 54 }
-    ]
+    "permissions" : [
+      {
+        "name": "Permission Group 1",
+        "items": [
+          { "isActive": true, "id": 11, "name": "Permission 11" },
+          { "isActive": true, "id": 14, "name": "Permission 11" }
+        ]
+      },
+      {
+        "name": "Permission Group 2",
+        "items": []
+      },
+      {
+        "name": "Permission Group 3",
+        "items": [
+          { "isActive": true, "id": 16, "name": "Permission 16" },
+          { "isActive": true, "id": 18, "name": "Permission 11" },
+          { "isActive": true, "id": 19, "name": "Permission 11" }
+        ]
+      }
+  ]
   }
 ]

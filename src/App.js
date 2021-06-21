@@ -30,10 +30,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/Project_Access">
+          <Route exact path="/">
             <ProjectAccessP dataIsSet={dataIsSet} />
           </Route>
-          <Route path="/User_Setup/:id">
+          <Route path="/UserSetup/:id">
             <UserSetupP dataIsSet={dataIsSet} />
           </Route>
         </Switch>

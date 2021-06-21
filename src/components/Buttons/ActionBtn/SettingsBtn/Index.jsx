@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SettingsIcon from "../../../../assets/Icons/Actions/settings.svg";
+import SettingsIcon from "../../../../assets/Icons/Actions/settings.png";
 
 const Index = ({ id, firstName, lastName, email, role }) => {
   return (
     <Link
       to={{
-        pathname: `User_Setup/${id}`,
+        pathname: `UserSetup/${id}`,
         state: {
           itemId: id,
           lastName: lastName,

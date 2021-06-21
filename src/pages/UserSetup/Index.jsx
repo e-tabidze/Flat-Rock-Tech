@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 import classes from "./styles.module.scss";
 import profileimg from "../../assets/Icons/General/profile-active.svg";
 import profileInactive from "../../assets/Icons/General/profile-inactive.svg";
-import settingsIcon from "../../assets/Icons/Actions/settings.svg";
+import settingsIcon from "../../assets/Icons/Actions/settings.png";
 import adminKey from "../../assets/Icons/General/admin-icon-active.svg";
 import Switcher from "../../components/Switcher/Index";
 import DropDown from "../../components/Dropdown/Index";
@@ -87,7 +87,7 @@ export default function Index({ dataIsSet }) {
           <h1 className={classes.container_content_tcolumn_header}>
             Permissions
           </h1>
-
+          
           <DropDown className={classes.container_tcolumn_dropdown} />
         </div>
       </div>
