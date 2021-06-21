@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
-import ProjectAccessP from './pages/ProjectAccess/Index';
-import UserSetupP from './pages/UserSetup/Index';
+import ProjectAccessP from "./pages/ProjectAccess/Index";
+import UserSetupP from "./pages/UserSetup/Index";
 
 import "./App.css";
 
@@ -26,6 +25,7 @@ function App() {
     return;
   };
 
+
   return (
     <Router>
       <div className="App">
@@ -34,7 +34,7 @@ function App() {
             <ProjectAccessP dataIsSet={dataIsSet} />
           </Route>
           <Route path="/User_Setup/:id">
-            <UserSetupP />
+            <UserSetupP dataIsSet={dataIsSet} />
           </Route>
         </Switch>
       </div>

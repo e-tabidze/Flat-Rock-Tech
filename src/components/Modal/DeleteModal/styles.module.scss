@@ -1,0 +1,45 @@
+.container {
+  width: 500px;
+  height: 250px;
+  z-index: 9;
+  position: absolute;
+  top: calc(50% - 100px);
+  left: calc(50% - 200px);
+  background-color: #fff;
+  box-shadow: 5px 5px 20px 10px #c6c6c6;
+
+  &_closeic {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 15px;
+  }
+
+  &_title {
+    font-size: 36px;
+    font-weight: 700;
+    font: normal normal 600 36px/48px Segoe UI;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    margin: 0px;
+    margin-bottom: 20px;    
+  }
+
+  &_info {
+    margin-top: 50px;
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: 2px solid #707070;
+  }
+
+  &_deletebtn {
+    width: 125px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: #f79696;
+    border: #f79696;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}

@@ -3,8 +3,14 @@ import React from "react";
 import CloseBtn from "../../../assets/Icons/Actions/close.svg";
 
 import GeneralButton from "../../Buttons/GeneralBtn/Index";
+import classes from "./styles.module.scss";
 
-export default function Index({ item, userData, setUserData, setItemToDelete }) {
+export default function Index({
+  item,
+  userData,
+  setUserData,
+  setItemToDelete,
+}) {
   const handleUserDelete = () => {
     let newData = [...userData];
     newData.splice(userData.indexOf(item), 1);
@@ -14,21 +20,19 @@ export default function Index({ item, userData, setUserData, setItemToDelete }) 
   };
 
   return (
-    <div className="delete-modal_container">
-      <div className="modal-head">
-        <div onClick={() => setItemToDelete(null)}>
-          <img src={CloseBtn} alt="" />
-        </div>
+    <div className={classes.container}>
+      <div className={classes.container_closeic}>
+        <img onClick={() => setItemToDelete(null)} src={CloseBtn} alt="" />
       </div>
       <div className="modal-body">
-        <h2>Delete User</h2>
-        <div className="user-info">
+        <h2 className={classes.container_title}>Delete User</h2>
+        <div className={classes.container_info}>
           <img src="" alt="" />
           <span>
             {item.firstName} {item.lastName}
           </span>
           <span className="user-status">
-            {item.isActive ? "Active User" : "Inactive User"}
+            {item.isActive ? "  Active User" : "Inactive User"}
           </span>
         </div>
       </div>
@@ -36,7 +40,7 @@ export default function Index({ item, userData, setUserData, setItemToDelete }) 
         <GeneralButton
           content="Delete User"
           handleClick={handleUserDelete}
-          className="delete-btn"
+          className={classes.container_deletebtn}
         />
       </div>
     </div>

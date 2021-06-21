@@ -1,0 +1,11 @@
+.cs {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  &_titleRendered {
+    display: flex;
+    align-items: center;
+  }
+}

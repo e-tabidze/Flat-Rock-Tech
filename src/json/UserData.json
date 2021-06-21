@@ -1,45 +1,72 @@
 [
-    {
-        "id": 1,
-        "firstName": "Danniel ",
-        "lastName": "Blichman",
-        "email": "danniel.blichman@testtask.com",
-        "isAdmin": true,
-        "isActive": true
-    },
-    {
-        "id": 2,
-        "firstName": "Margarette ",
-        "lastName": "Jones",
-        "email": "margarette.jones@testtask.com",
-        "isAdmin": false,
-        "isActive": false
-
-    },
-    {
-        "id": 3,
-        "firstName": "Bethany ",
-        "lastName": "Doe",
-        "email": "bethany.doe@testtask.com",
-        "isAdmin": false,
-        "isActive": true
-
-    },
-    {
-        "id": 4,
-        "firstName": "Samuel ",
-        "lastName": "Jackson",
-        "email": "samuel.jackson@testtask.com",
-        "isAdmin": true,
-        "isActive": false
-
-    },
-    {
-        "id": 5,
-        "firstName": "Persival ",
-        "lastName": "Blinn",
-        "email": "persival.blinn@testtask.com",
-        "isAdmin": false,
-        "isActive": true
-    }
+  {
+    "id": 1,
+    "firstName": "Danniel ",
+    "lastName": "Blichman",
+    "email": "danniel.blichman@testtask.com",
+    "isAdmin": true,
+    "isActive": true,
+    "permission Group 1": [
+      { "permission1": true, "id": 11 },
+      { "permission2": false, "id": 12 },
+      { "permission3": true, "id": 13 },
+      { "permission4": true, "id": 14 }
+    ]
+  },
+  {
+    "id": 2,
+    "firstName": "Margarette ",
+    "lastName": "Jones",
+    "email": "margarette.jones@testtask.com",
+    "isAdmin": false,
+    "isActive": false,
+    "permission Group 1": [
+      { "permission1": true, "id": 21 },
+      { "permission2": false, "id": 22 },
+      { "permission3": true, "id": 23 },
+      { "permission4": true, "id": 24 }
+    ]
+  },
+  {
+    "id": 3,
+    "firstName": "Bethany ",
+    "lastName": "Doe",
+    "email": "bethany.doe@testtask.com",
+    "isAdmin": false,
+    "isActive": true,
+    "permission Group 1": [
+      { "permission1": true, "id": 31 },
+      { "permission2": false, "id": 32 },
+      { "permission3": true, "id": 33 },
+      { "permission4": true, "id": 34 }
+    ]
+  },
+  {
+    "id": 4,
+    "firstName": "Samuel ",
+    "lastName": "Jackson",
+    "email": "samuel.jackson@testtask.com",
+    "isAdmin": true,
+    "isActive": false,
+    "permission Group 1": [
+      { "permission1": true, "id": 41 },
+      { "permission2": false, "id": 42 },
+      { "permission3": true, "id": 43 },
+      { "permission4": true, "id": 44 }
+    ]
+  },
+  {
+    "id": 5,
+    "firstName": "Persival ",
+    "lastName": "Blinn",
+    "email": "persival.blinn@testtask.com",
+    "isAdmin": false,
+    "isActive": true,
+    "permission Group 1": [
+      { "permission1": true, "id": 51 },
+      { "permission2": false, "id": 52 },
+      { "permission3": true, "id": 53 },
+      { "permission4": true, "id": 54 }
+    ]
+  }
 ]

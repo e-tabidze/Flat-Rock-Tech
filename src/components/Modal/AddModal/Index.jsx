@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CloseBtn from "../../../assets/Icons/Actions/close.svg";
 import GeneralButton from "../../Buttons/GeneralBtn/Index";
-
+import classes from "./styles.module.scss";
 const Index = ({ userData, setUserData, toggleInviteModal }) => {
   const [newUser, setNewUser] = useState({
     id: userData[userData.length - 1].id + 1,
@@ -51,91 +51,57 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
   };
 
   const handleFormValidation = () => {
-      for(const property in fieldErrors){
-          if(!property) {
-              console.log('aeeeee')
-            return setFormIsValid(false);
-          } else {
-            setFormIsValid(true);
-          }
+    for (const property in fieldErrors) {
+      if (!property) {
+        console.log("aeeeee");
+        return setFormIsValid(false);
+      } else {
+        setFormIsValid(true);
       }
-  }
+    }
+  };
 
   return (
-    <div className="add-modal_container">
-      <div className="modal-head">
-        <div onClick={() => toggleInviteModal(false)}>
-          <img src={CloseBtn} alt="" />
-        </div>
+    <div className={classes.container}>
+      <div className={classes.container_header}>
+        <img onClick={() => toggleInviteModal(false)} src={CloseBtn} alt="" />
       </div>
-      <div className="modal-body">
-        <h2>Invite New User</h2>
-        <div className="user-fullName">
+      <div className={classes.container_modalbody}>
+        <h2 className={classes.container_title}>Invite New User</h2>
+        <div className={classes.container_name}>
           <img src="" alt="" />
-          <div className="user-firstName">
-            <label
-              className={`invite-input-label ${
-                fieldErrors.firstName ? "input-valid" : "input-invalid"
-              }`}
-              htmlFor="firstName"
-            >
-              {newUser.firstName && "* First Name"}
-            </label>
-            <input
-              id="firstName"
-              type="text"
-              name="firstName"
-              placeholder="* First Name"
-              onChange={(e) => handleInputChange(e)}
-            />
-          </div>
-          <div className="user-lastName">
-            <label
-              className={`invite-input-label ${
-                fieldErrors.lastName ? "input-valid" : "input-invalid"
-              }`}
-              htmlFor="lastName"
-            >
-              {newUser.lastName && "* Last Name"}
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              name="lastName"
-              placeholder="* Last Name"
-              onChange={(e) => handleInputChange(e)}
-            />
-          </div>
+
+          <input
+            id="firstName"
+            type="text"
+            name="firstName"
+            placeholder="* First Name"
+            onChange={(e) => handleInputChange(e)}
+            className={classes.container_input_firstname}
+          />
+
+          <input
+            id="lastName"
+            type="text"
+            name="lastName"
+            placeholder="* Last Name"
+            onChange={(e) => handleInputChange(e)}
+            className={classes.container_input_lastName}
+          />
         </div>
         <div className="user-email">
-          <label
-            className={`invite-input-label ${
-              fieldErrors.email ? "input-valid" : "input-invalid"
-            }`}
-            htmlFor="email"
-          >
-            {newUser.email && "* Email"}
-          </label>
-
           <input
             id="email"
             type="email"
             name="email"
             placeholder="* Email"
             onChange={(e) => handleInputChange(e)}
+            className={classes.container_input_email}
           />
         </div>
         <div className="user-role">
-          <label
-            className={`invite-input-label ${
-              fieldErrors.isAdmin ? "input-valid" : "input-invalid"
-            }`}
-            htmlFor="role"
-          >
-            {newUser.isAdmin && "* Role"}
-          </label>
-
           <select
+            className={classes.container_input_role}
             id="role"
             name="isAdmin"
             defaultValue={0}
@@ -146,15 +112,19 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
           </select>
         </div>
       </div>
-      <div className="moda-footer">
+      <div className={classes.container_modalaction}>
         <GeneralButton
           content="Send Invitation"
           handleClick={handleUserInvite}
-          className="invite-btn"
+          className={classes.container_invitebtn}
           disabled={!formIsValid}
         />
-        <span className={`error-handling ${formIsValid ? "error-handling-valid" : "error-handling-invalid"}`}>
-            {formIsValid ? "Good to go" : "Fill in all the fields"}
+        <span
+          className={`error-handling ${
+            formIsValid ? "error-handling-valid" : "error-handling-invalid"
+          }`}
+        >
+          {formIsValid ? "Good to go" : "Fill in all the fields"}
         </span>
       </div>
     </div>

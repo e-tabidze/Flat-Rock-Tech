@@ -1,12 +1,16 @@
-import React from "react";
-import { Switch, useLocation } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router";
 import classes from "./styles.module.scss";
 import profileimg from "../../assets/Icons/General/profile-active.svg";
+import profileInactive from "../../assets/Icons/General/profile-inactive.svg";
 import settingsIcon from "../../assets/Icons/Actions/settings.svg";
 import adminKey from "../../assets/Icons/General/admin-icon-active.svg";
 import Switcher from "../../components/Switcher/Index";
+import DropDown from "../../components/Dropdown/Index";
 
-export default function Index() {
+export default function Index({ dataIsSet }) {
+  const [userActive, setUserActive] = useState(false);
+
   let location = useLocation();
   let firstName = location.state.firstName;
   let lastName = location.state.lastName;
@@ -24,7 +28,7 @@ export default function Index() {
           <div>
             <img
               className={classes.container_content_fcolumn_img}
-              src={profileimg}
+              src={userActive ? profileimg : profileInactive}
             />
             <img src={adminKey} />
           </div>
@@ -45,7 +49,10 @@ export default function Index() {
         <div className={classes.container_content_scolumn}>
           <h1 className={classes.container_content_scolumn_header}>Details</h1>
           <div className={classes.container_content_scolumn_switcher}>
-            <Switcher isActive={true} />
+            <Switcher
+              handleClick={() => setUserActive(!userActive)}
+              isActive={userActive ? true : false}
+            />
           </div>
           <div>
             <div>
@@ -76,7 +83,13 @@ export default function Index() {
             </button>
           </div>
         </div>
-        <div></div>
+        <div className={classes.container_content_tcolumn}>
+          <h1 className={classes.container_content_tcolumn_header}>
+            Permissions
+          </h1>
+
+          <DropDown className={classes.container_tcolumn_dropdown} />
+        </div>
       </div>
     </div>
   );
