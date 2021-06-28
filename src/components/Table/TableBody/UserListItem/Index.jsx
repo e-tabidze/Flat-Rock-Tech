@@ -58,7 +58,14 @@ export default function Index({
           isActive={item.isActive}
         />
       </td>
-      <td>
+      <td
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "20px"
+        }}
+      >
         <SettingsBtn
           id={item.id}
           lastName={item.lastName}

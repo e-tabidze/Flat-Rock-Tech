@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SettingsIcon from "../../../../assets/Icons/Actions/settings.png";
+import classes from "./styles.module.scss";
 
 const Index = ({ id, firstName, lastName, email, role }) => {
   return (
@@ -16,7 +17,11 @@ const Index = ({ id, firstName, lastName, email, role }) => {
         },
       }}
     >
-      <img src={SettingsIcon} alt="Settings" />
+      <img
+        src={SettingsIcon}
+        alt="Settings"
+        className={classes.container_img}
+      />
     </Link>
   );
 };
