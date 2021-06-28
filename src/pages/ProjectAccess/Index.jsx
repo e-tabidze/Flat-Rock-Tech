@@ -10,6 +10,7 @@ import AddModal from "../../components/Modal/AddModal/Index";
 
 import AddBtn from "../../components/Buttons/AddBtn/Index";
 import classes from "./styles.module.scss";
+
 const Index = ({ dataIsSet }) => {
   const [userData, setUserData] = useState([]);
   const [filteredUserData, setFilteredUserData] = useState([]);
