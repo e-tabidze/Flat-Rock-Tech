@@ -1,0 +1,9 @@
+.container {
+  border: none;
+  background: none;
+
+  &_icon:hover {
+    filter: brightness(1.4);
+    cursor: pointer;
+  }
+}
