@@ -1,81 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Switcher from "../Switcher/Index";
-import { Tree } from "@fluentui/react-northstar";
-import {
-  TriangleDownIcon,
-  TriangleEndIcon,
-} from "@fluentui/react-icons-northstar";
 import classes from "./styles.module.scss";
 
-const items = [
-  {
-    id: "tree-title-customization-item-1",
-    title: <Switcher text={"Permission Group 1"} />,
-    items: [
-      {
-        id: "tree-title-customization-item-2",
-        title: <Switcher text={"Permission 11"} />,
-      },
-      {
-        id: "tree-title-customization-item-3",
-        title: <Switcher text={"Permission 12"} />,
-      },
-      {
-        id: "tree-title-customization-item-4",
-        title: <Switcher text={"Permission 13"} />,
-      },
-      {
-        id: "tree-title-customization-item-5",
-        title: <Switcher text={"Permission 14"} />,
-      },
-    ],
-  },
-  {
-    id: "tree-title-customization-item-2",
-    title: <Switcher text={"Permission Group 2"} />,
-    items: [
-      {
-        id: "tree-title-customization-item-222",
-        title: <Switcher text={"Permission 11"} />,
-      },
-      {
-        id: "tree-title-customization-item-333",
-        title: <Switcher text={"Permission 12"} />,
-      },
-      {
-        id: "tree-title-customization-item-44",
-        title: <Switcher text={"Permission 13"} />,
-      },
-      {
-        id: "tree-title-customization-item-55",
-        title: <Switcher text={"Permission 14"} />,
-      },
-    ],
-  },
-];
-const titleRenderer = (
-  Component,
-  { content, expanded, open, hasSubtree, ...restProps }
-) => (
-  <Component
-    expanded={expanded}
-    hasSubtree={hasSubtree}
-    {...restProps}
-    className={classes.container_titleRendered}
-  >
-    {expanded ? <TriangleDownIcon /> : <TriangleEndIcon />}
-    {content}
-  </Component>
-);
+const Index = ({ permGroup, onPermissionActiveClick }) => {
+  const [data, setData] = useState({ title: "", items: [] });
+  const [treeOpen, toggleTreeOpen] = useState(false);
+  useEffect(() => {
+    if (permGroup) createLocalGroup();
+  }, [permGroup]);
 
-const Index = () => {
+  const createLocalGroup = () => {
+    setData(permGroup);
+  };
+
+  const handlePermGroupUpdate = (perm, bool) => {
+    let newPermGroup = { ...permGroup };
+
+    let permIndex = newPermGroup.items.indexOf(perm);
+    newPermGroup.items[permIndex].isActive = bool;
+    setData(newPermGroup);
+    onPermissionActiveClick(newPermGroup);
+  };
+
   return (
-    <Tree
-      exclusive
-      aria-label="Custom title"
-      items={items}
-      renderItemTitle={titleRenderer}
-    />
+    <>
+      {data.items.length > 0 && <h4 className={classes.container_header} onClick={() => toggleTreeOpen(!treeOpen)}>{data.title}</h4>}
+      <div className={`${classes.container_treeContent} ${treeOpen ? classes.container_treeContent_open : classes.container_treeContent_closed} `}>
+        {data.items.map((item) => {
+          return (
+            <div className={classes.permissionWrapper}>
+              <div
+                className={`${classes.indicator} ${
+                  item.isActive
+                    ? `${classes.indicator_enabled}`
+                    : `${classes.indicator_disabled}`
+                }`}
+              ></div>
+              <span>{item.title}</span>
+              <Switcher
+                perm={item}
+                className={classes.permissionWrapper_switcher}
+                handlePermGroupUpdate={handlePermGroupUpdate}
+                isActive={item.isActive}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
