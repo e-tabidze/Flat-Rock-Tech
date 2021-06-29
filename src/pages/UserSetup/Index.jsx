@@ -9,57 +9,13 @@ import Switcher from "../../components/Switcher/Index";
 import DropDown from "../../components/Dropdown/Index";
 
 export default function Index({ dataIsSet }) {
-  const [userData, setUserData] = useState([]);
   const [userActive, setUserActive] = useState(false);
-  const [user, setUser] = useState(null);
 
   let location = useLocation();
   let firstName = location.state.firstName;
   let lastName = location.state.lastName;
   let email = location.state.email;
   let role = location.state.role;
-
-  useEffect(() => {
-    if (dataIsSet) handleGetUserData();
-  }, [dataIsSet]);
-
-  const handleGetUserData = () => {
-    let dataToSet = JSON.parse(localStorage.getItem("userData"));
-    if (dataToSet) {
-      let userObj = dataToSet.filter(
-        (item) => item.id === location.state.itemId
-      );
-      setUser(userObj[0]);
-      setUserData(dataToSet);
-    }
-  };
-
-  const onPermissionActiveClick = (permGroup) => {
-    let newData = [...userData];
-    newData[newData.indexOf(user)].permissions.items = permGroup;
-    let userObj = newData.filter((item) => item.id === location.state.itemId);
-    setUser(userObj[0]);
-    console.log(newData, " [NEW DATA]");
-    localStorage.setItem("userData", JSON.stringify(newData));
-  };
-
-  const toggleAdmin = (bool) => {
-    let newUserObj = {...user};
-    let newData = [...userData];
-    newUserObj.isAdmin = bool;
-    newData[newData.indexOf(user)] = newUserObj;
-    localStorage.setItem("userData", JSON.stringify(newData));
-    setUser(newUserObj);
-  }
-
-  const toggleUserActive = (bool) => {
-    let newUserObj = {...user};
-    let newData = [...userData];
-    newUserObj.isActive = bool;
-    newData[newData.indexOf(user)] = newUserObj;
-    localStorage.setItem("userData", JSON.stringify(newData));
-    setUser(newUserObj);
-  }
 
   return (
     <div className={classes.container}>
@@ -92,12 +48,12 @@ export default function Index({ dataIsSet }) {
 
         <div className={classes.container_content_scolumn}>
           <h1 className={classes.container_content_scolumn_header}>Details</h1>
-          {user && <div className={classes.container_content_scolumn_switcher}>
+          <div className={classes.container_content_scolumn_switcher}>
             <Switcher
-              handleToggle={toggleUserActive}
-              isActive={user.isActive}
+              handleClick={() => setUserActive(!userActive)}
+              isActive={userActive ? true : false}
             />
-          </div>}
+          </div>
           <div>
             <div>
               The user is <span>Active</span>
@@ -131,22 +87,8 @@ export default function Index({ dataIsSet }) {
           <h1 className={classes.container_content_tcolumn_header}>
             Permissions
           </h1>
-          {user && <div className={classes.container_content_tcolumn_superAdmin}>
-            <h2>Super Admin</h2>
-            <Switcher isActive={user.isAdmin} handleToggle={toggleAdmin}  />
-          </div>}
-          {user &&
-            user.permissions.map((permGroup) => {
-              return (
-                <>
-                  <DropDown
-                    permGroup={permGroup}
-                    onPermissionActiveClick={onPermissionActiveClick}
-                  />
-                 {permGroup.items.length > 0 && <div className={classes.container_content_tcolumn_dividingLine}></div>}
-                </>
-              );
-            })}
+          
+          <DropDown className={classes.container_tcolumn_dropdown} />
         </div>
       </div>
     </div>

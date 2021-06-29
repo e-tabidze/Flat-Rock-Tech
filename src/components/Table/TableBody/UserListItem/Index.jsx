@@ -23,7 +23,7 @@ export default function Index({
     localStorage.setItem("userData", JSON.stringify(newData));
   };
   return (
-    <tr className={classes.container}>
+    <tr>
       <td>
         <img
           className={classes.container_img}
@@ -54,11 +54,18 @@ export default function Index({
       </td>
       <td className={classes.container_switcher}>
         <Switcher
-          handleToggle={handleProfileActiveClick}
+          handleClick={handleProfileActiveClick}
           isActive={item.isActive}
         />
       </td>
-      <td className={classes.container_td}>
+      <td
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "20px"
+        }}
+      >
         <SettingsBtn
           id={item.id}
           lastName={item.lastName}

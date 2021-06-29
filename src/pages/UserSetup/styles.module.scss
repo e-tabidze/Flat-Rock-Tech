@@ -34,9 +34,7 @@
     margin: 0 auto;
     margin-top: 80px;
     display: grid;
-    justify-content: center;
-    padding: 0px 50px 0px 50px;
-    grid-template-columns: 30% 30% 40%;
+    grid-template-columns: 25% 25% 50%;
     &_fcolumn {
       &_img {
         height: 200px;
@@ -100,22 +98,10 @@
       }
     }
     &_tcolumn {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      &_dividingLine {
-        width: 100%;
-        height: 0.5px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        background-color: #00000010;
-      }
-
-      &_superAdmin {
+      &_dropdpwn {
         display: flex;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   }
