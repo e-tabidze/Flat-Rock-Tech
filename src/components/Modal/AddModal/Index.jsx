@@ -3,7 +3,65 @@ import React, { useState } from "react";
 import CloseBtn from "../../../assets/Icons/Actions/close.svg";
 import GeneralButton from "../../Buttons/GeneralBtn/Index";
 import classes from "./styles.module.scss";
+
 const Index = ({ userData, setUserData, toggleInviteModal }) => {
+  const userPermissions = [
+    {
+      id: `user-${userData.length + 1}-permission-group-1`,
+      title: "Permission Group 1",
+      permissionsActive: true,
+      items: [
+        {
+          id: `user-${userData.length + 1}-permission-group-1-item-1`,
+          isActive: true,
+          title: "Permission 11",
+        },
+        {
+          id: `user-${userData.length + 1}-permission-group-1-item-2`,
+          isActive: false,
+          title: "Permission 12",
+        },
+        {
+          id: `user-${userData.length + 1}-permission-group-1-item-3`,
+          isActive: true,
+          title: "Permission 13",
+        },
+      ],
+    },
+    {
+      id: `user-${userData.length + 1}-permission-group-2`,
+      title: "Permission Group 2",
+      permissionsActive: false,
+      items: [],
+    },
+    {
+      id: `user-${userData.length + 1}-permission-group-3`,
+      title: "Permission Group 3",
+      permissionsActive: true,
+      items: [
+        {
+          id: `user-${userData.length + 1}-permission-group-3-item-1`,
+          isActive: true,
+          title: "Permission 16",
+        },
+        {
+          id: `user-${userData.length + 1}-permission-group-2-item-2`,
+          isActive: false,
+          title: "Permission 11",
+        },
+        {
+          id: `user-${userData.length + 1}-permission-group-2-item-3`,
+          isActive: true,
+          title: "Permission 11",
+        },
+        {
+          id: `user-${userData.length + 1}-permission-group-1-item-4`,
+          isActive: true,
+          title: "Permission 11",
+        },
+      ],
+    },
+  ];
   const [newUser, setNewUser] = useState({
     id: userData[userData.length - 1].id + 1,
     firstName: null,
@@ -11,6 +69,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     email: null,
     isAdmin: false,
     isActive: true,
+    permissions: userPermissions,
   });
   const [fieldErrors, setFieldErrors] = useState({
     firstName: false,
@@ -25,6 +84,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     setUserData(newData);
     localStorage.setItem("userData", JSON.stringify(newData));
     toggleInviteModal(false);
+    console.log(newUser, newData);
   };
 
   const handleInputChange = (e) => {

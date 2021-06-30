@@ -22,6 +22,7 @@ export default function Index({
     setFilteredUserData(newData);
     localStorage.setItem("userData", JSON.stringify(newData));
   };
+
   return (
     <tr className={classes.container}>
       <td>
@@ -39,7 +40,7 @@ export default function Index({
           <span className={classes.container_info_email}>{item.email}</span>
         </div>
       </td>
-      <td className={classes.container_td}>
+      <td>
         {item.isAdmin ? (
           <div className={classes.container_roleinfo}>
             <img
@@ -51,10 +52,10 @@ export default function Index({
               src={item.isActive ? UserAdminActive : UserAdminInactive}
               alt=""
             />
-            <span>Admin</span>
+            <span className={classes.container_roletext}>Admin</span>
           </div>
         ) : (
-          <span>User</span>
+          <span className={classes.container_usertext}>User</span>
         )}
       </td>
       <td className={classes.container_switcher}>
