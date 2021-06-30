@@ -68,4 +68,9 @@
     justify-content: space-between;
     width: 100%;
   }
+
+  &_namefield {
+    display: flex;
+    flex-direction: column;
+  }
 }

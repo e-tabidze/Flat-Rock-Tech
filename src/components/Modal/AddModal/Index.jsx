@@ -79,8 +79,8 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const schema = {
-    firstName: Joi.string().max(50).required().label("First Name"),
-    lastName: Joi.string().max(50).required().label("Last Name"),
+    firstName: Joi.string().min(3).max(50).required().label("First Name"),
+    lastName: Joi.string().min(3).max(50).required().label("Last Name"),
     email: Joi.string().email().required().max(255).label("Email"),
     isAdmin: Joi.string().max(50).required().label("Role"),
   };
@@ -180,7 +180,8 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
   const handleFormValidation = () => {
     const result = Joi.validate(newUser, schema, { abortEarly: false });
 
-    if (!result.error) return null; setFormIsValid(true)
+    if (!result.error) return null;
+    !result.error && setFormIsValid(true);
 
     const errors = {};
     for (let item of result.error.details) errors[item.path[0]] = item.message;
@@ -197,29 +198,32 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
         <h2 className={classes.container_title}>Invite New User</h2>
         <div className={classes.container_name}>
           <img src="" alt="" />
+          <div className={classes.container_namefield}>
+            <input
+              id="firstName"
+              type="text"
+              name="firstName"
+              placeholder="* First Name"
+              onChange={(e) => handleInputChange(e)}
+              className={classes.container_input_firstname}
+              error={fieldErrors.firstName}
+            />
+            {fieldErrors && <div>{fieldErrors.firstName}</div>}
+          </div>
 
-          <input
-            id="firstName"
-            type="text"
-            name="firstName"
-            placeholder="* First Name"
-            onChange={(e) => handleInputChange(e)}
-            className={classes.container_input_firstname}
-            error={fieldErrors.firstName}
-          />
-          {fieldErrors && <span>fieldErrors.firstName</span>}
-
-          <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            placeholder="* Last Name"
-            onChange={(e) => handleInputChange(e)}
-            className={classes.container_input_lastName}
-          />
-          {fieldErrors && <span>fieldErrors.lastName</span>}
+          <div className={classes.container_namefield}>
+            <input
+              id="lastName"
+              type="text"
+              name="lastName"
+              placeholder="* Last Name"
+              onChange={(e) => handleInputChange(e)}
+              className={classes.container_input_lastName}
+            />
+            {fieldErrors && <div>{fieldErrors.lastName}</div>}
+          </div>
         </div>
-        <div className="user-email">
+        <div className={classes.container_emailfield}>
           <input
             id="email"
             type="email"
@@ -228,7 +232,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
             onChange={(e) => handleInputChange(e)}
             className={classes.container_input_email}
           />
-          {fieldErrors && <span>fieldErrors.email</span>}
+          {fieldErrors && <div>{fieldErrors.email}</div>}
         </div>
         <div className="user-role">
           <select
