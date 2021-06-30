@@ -56,6 +56,7 @@ export default function Index({
         <Switcher
           handleInfoUpdate={handleProfileActiveClick}
           isActive={item.isActive}
+          permissionsActive={true}
         />
       </td>
       <td className={classes.container_td}>

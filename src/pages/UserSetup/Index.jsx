@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { Link } from 'react-router-dom';
 import classes from "./styles.module.scss";
 import profileimg from "../../assets/Icons/General/profile-active.svg";
 import profileInactive from "../../assets/Icons/General/profile-inactive.svg";
-import settingsIcon from "../../assets/Icons/Actions/settings.png";
+import SettingsIcon from "../../assets/Icons/Actions/settings-white.svg";
 import adminKey from "../../assets/Icons/General/admin-icon-active.svg";
 import Switcher from "../../components/Switcher/Index";
 import DropDown from "../../components/Dropdown/Index";
+
+import BackIcon from '../../assets/Icons/Arrows/circled-left.png';
 
 export default function Index({ dataIsSet }) {
   const [userData, setUserData] = useState([]);
@@ -44,7 +47,7 @@ export default function Index({ dataIsSet }) {
   };
 
   const toggleAdmin = (bool) => {
-    let newUserObj = {...user};
+    let newUserObj = { ...user };
     let newData = [...userData];
     newUserObj.isAdmin = bool;
     newData[newData.indexOf(user)] = newUserObj;
@@ -54,7 +57,7 @@ export default function Index({ dataIsSet }) {
   }
 
   const toggleUserActive = (bool) => {
-    let newUserObj = {...user};
+    let newUserObj = { ...user };
     let newData = [...userData];
     newUserObj.isActive = bool;
     newData[newData.indexOf(user)] = newUserObj;
@@ -65,8 +68,11 @@ export default function Index({ dataIsSet }) {
   return (
     <div className={classes.container}>
       <div className={classes.container_header}>
+        <Link to="/" ><img className={classes.container_header_backBtn} src={BackIcon} alt="" /></Link>
         <div className={classes.container_header_headerText}>User Setup </div>
-        <img className={classes.container_header_settings} src={settingsIcon} />
+        <div className={classes.container_header_settingsWrapper}>
+          <img className={classes.container_header_settingsWrapper_settings} src={SettingsIcon} />
+        </div>
       </div>
       <div className={classes.container_content}>
         <div className={classes.container_content_fcolumn}>
@@ -134,12 +140,12 @@ export default function Index({ dataIsSet }) {
           </h1>
           {user && <div className={classes.container_content_tcolumn_superAdmin}>
             <h2>Super Admin</h2>
-            <Switcher isActive={user.isAdmin} toggleAdmin={toggleAdmin} permissionsActive={true}  />
+            <Switcher isActive={user.isAdmin} toggleAdmin={toggleAdmin} permissionsActive={true} />
           </div>}
           {user &&
             user.permissions.map((permGroup) => {
               return (
-                <div key={permGroup.id} style={{width: "100%"}}>
+                <div key={permGroup.id} style={{ width: "100%" }}>
                   <DropDown
                     permGroup={permGroup}
                     onPermissionActiveClick={onPermissionActiveClick}
