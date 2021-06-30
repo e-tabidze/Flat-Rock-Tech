@@ -39,7 +39,6 @@ export default function Index({ dataIsSet }) {
     newData[newData.indexOf(user)].permissions.items = permGroup;
     let userObj = newData.filter((item) => item.id === location.state.itemId);
     setUser(userObj[0]);
-    console.log(newData, " [NEW DATA]");
     localStorage.setItem("userData", JSON.stringify(newData));
   };
 
@@ -49,6 +48,7 @@ export default function Index({ dataIsSet }) {
     newUserObj.isAdmin = bool;
     newData[newData.indexOf(user)] = newUserObj;
     localStorage.setItem("userData", JSON.stringify(newData));
+    console.log(newUserObj, " [USER]")
     setUser(newUserObj);
   }
 
@@ -133,17 +133,18 @@ export default function Index({ dataIsSet }) {
           </h1>
           {user && <div className={classes.container_content_tcolumn_superAdmin}>
             <h2>Super Admin</h2>
-            <Switcher isActive={user.isAdmin} toggleAdmin={toggleAdmin}  />
+            <Switcher isActive={user.isAdmin} toggleAdmin={toggleAdmin} permissionsActive={true}  />
           </div>}
           {user &&
             user.permissions.map((permGroup) => {
               return (
                 <>
                   <DropDown
+                    key={permGroup.id}
                     permGroup={permGroup}
                     onPermissionActiveClick={onPermissionActiveClick}
                   />
-                  <div className={classes.container_content_tcolumn_dividingLine}></div>
+                  {permGroup.items.length > 0 && <div className={classes.container_content_tcolumn_dividingLine}></div>}
                 </>
               );
             })}

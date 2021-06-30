@@ -22,25 +22,36 @@ const Index = ({ permGroup, onPermissionActiveClick }) => {
     onPermissionActiveClick(newPermGroup);
   };
 
+  const toggleGroupPerms = (bool) => {
+    let newPermGroup = { ...permGroup };
+    newPermGroup.permissionsActive = bool;
+    setData(newPermGroup);
+    onPermissionActiveClick(newPermGroup);
+  }
+
   return (
     <>
-      {data.items.length > 0 && <h4 className={classes.container_header} onClick={() => toggleTreeOpen(!treeOpen)}>{data.title}</h4>}
+      {data.items.length > 0 && <div className={classes.container_headerWrapper}>
+        <h4 className={classes.container_headerWrapper_header} onClick={() => toggleTreeOpen(!treeOpen)}>{data.title}
+        </h4>
+        <Switcher className={classes.container_header_switcher} isActive={data.permissionsActive} permissionsActive={data.permissionsActive} toggleGroupPerms={toggleGroupPerms} isPermToggler={true}  />
+      </div>}
       <div className={`${classes.container_treeContent} ${treeOpen ? classes.container_treeContent_open : classes.container_treeContent_closed} `}>
         {data.items.map((item) => {
           return (
             <div className={classes.permissionWrapper}>
               <div
-                className={`${classes.indicator} ${
-                  item.isActive
+                className={`${classes.indicator} ${item.isActive
                     ? `${classes.indicator_enabled}`
                     : `${classes.indicator_disabled}`
-                }`}
+                  }`}
               ></div>
               <span>{item.title}</span>
               <Switcher
                 perm={item}
                 className={classes.permissionWrapper_switcher}
                 handlePermGroupUpdate={handlePermGroupUpdate}
+                permissionsActive={data.permissionsActive}
                 isActive={item.isActive}
               />
             </div>

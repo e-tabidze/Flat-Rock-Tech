@@ -8,15 +8,22 @@
     display: flex;
     align-items: center;
   }
-
-  &_header {
-    cursor: pointer;
-    &:hover {
-      font-weight: bolder;
-      font-size: 15px;
+  &_headerWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+    &_header {
+      cursor: pointer;
+      margin-right: auto;
+      &:hover {
+        font-weight: bolder;
+        font-size: 15px;
+        transition: 300ms;
+      }
       transition: 300ms;
     }
-    transition: 300ms;
   }
 
   &_treeContent {
