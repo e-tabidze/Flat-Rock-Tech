@@ -23,6 +23,10 @@ export default function Index({ dataIsSet }) {
     if (dataIsSet) handleGetUserData();
   }, [dataIsSet]);
 
+  useEffect(() => {
+    console.log(user, " [USER]")
+  }, [user])
+
   const handleGetUserData = () => {
     let dataToSet = JSON.parse(localStorage.getItem("userData"));
     if (dataToSet) {
@@ -48,7 +52,7 @@ export default function Index({ dataIsSet }) {
     newUserObj.isAdmin = bool;
     newData[newData.indexOf(user)] = newUserObj;
     localStorage.setItem("userData", JSON.stringify(newData));
-    console.log(newUserObj, " [USER]")
+    setUserData(newData);
     setUser(newUserObj);
   }
 
