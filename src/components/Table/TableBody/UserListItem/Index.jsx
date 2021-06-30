@@ -39,10 +39,15 @@ export default function Index({
           <span className={classes.container_info_email}>{item.email}</span>
         </div>
       </td>
-      <td>
+      <td className={classes.container_td}>
         {item.isAdmin ? (
           <div className={classes.container_roleinfo}>
             <img
+              className={
+                item.isActive
+                  ? classes.container_keyimg_active
+                  : classes.container_keyimg
+              }
               src={item.isActive ? UserAdminActive : UserAdminInactive}
               alt=""
             />
