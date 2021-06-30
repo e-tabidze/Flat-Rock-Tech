@@ -23,10 +23,6 @@ export default function Index({ dataIsSet }) {
     if (dataIsSet) handleGetUserData();
   }, [dataIsSet]);
 
-  useEffect(() => {
-    console.log(user, " [USER]")
-  }, [user])
-
   const handleGetUserData = () => {
     let dataToSet = JSON.parse(localStorage.getItem("userData"));
     if (dataToSet) {
@@ -43,6 +39,7 @@ export default function Index({ dataIsSet }) {
     newData[newData.indexOf(user)].permissions.items = permGroup;
     let userObj = newData.filter((item) => item.id === location.state.itemId);
     setUser(userObj[0]);
+    setUserData(newData);
     localStorage.setItem("userData", JSON.stringify(newData));
   };
 
@@ -142,14 +139,13 @@ export default function Index({ dataIsSet }) {
           {user &&
             user.permissions.map((permGroup) => {
               return (
-                <>
+                <div key={permGroup.id} style={{width: "100%"}}>
                   <DropDown
-                    key={permGroup.id}
                     permGroup={permGroup}
                     onPermissionActiveClick={onPermissionActiveClick}
                   />
                   {permGroup.items.length > 0 && <div className={classes.container_content_tcolumn_dividingLine}></div>}
-                </>
+                </div>
               );
             })}
         </div>

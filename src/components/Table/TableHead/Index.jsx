@@ -11,33 +11,30 @@ export default function Index({ userData, setFilteredUserData }) {
   const [sortByStatus, setSortByStatus] = useState(null);
 
   const [sortID, setSortID] = useState(0);
-  const [sortLoading, setSortLoading] = useState(true);
+  const [sortLoading, setSortLoading] = useState(null);
 
   useEffect(() => {
-    if (!sortLoading) {
-      console.log(sortByUser, sortByRole, sortByStatus)
+    if (!sortLoading && sortLoading !== null) {
       handleSortClick();
+      setSortLoading(null);
     }
   }, [sortLoading])
 
   const clearSortings = (id) => {
-    console.log(id);
     setSortLoading(true);
     setSortID(id);
-    if (sortByUser !== null) {
-      setSortByUser(!sortByUser);
+    if (id === 1) {
+      setSortByUser(sortByUser !== null ? !sortByUser : true);
       setSortByRole(null);
       setSortByStatus(null);
-      setSortLoading(false);
-
-    } else if (sortByRole !== null) {
+    } else if (id === 2) {
       setSortByUser(null);
-      setSortByRole(!sortByRole);
+      setSortByRole(sortByRole !== null ? !sortByRole : true);
       setSortByStatus(null);
-    } else if (sortByStatus !== null) {
+    } else if (id === 3) {
       setSortByUser(null);
       setSortByRole(null);
-      setSortByStatus(!sortByStatus);
+      setSortByStatus(sortByStatus !== null ? !sortByStatus : true);
     } else {
       setSortByUser(null);
       setSortByRole(null);
@@ -49,7 +46,7 @@ export default function Index({ userData, setFilteredUserData }) {
   const handleSortClick = () => {
     switch (sortID) {
       case 1:
-        handleSortByUser()
+        handleSortByUser();
         break;
       case 2:
         handleSortByRole()
@@ -93,7 +90,7 @@ export default function Index({ userData, setFilteredUserData }) {
       a.isActive < b.isActive ? 1 : -1
     );
     let desc = [...sortedByName].sort((a, b) =>
-      a.isActive < b.isActive ? 1 : -1
+      a.isActive > b.isActive ? 1 : -1
     );
     setFilteredUserData(sortByStatus ? asc : desc);
   };
