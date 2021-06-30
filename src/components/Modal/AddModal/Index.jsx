@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Joi from "joi-browser";
 import CloseBtn from "../../../assets/Icons/Actions/close.svg";
 import GeneralButton from "../../Buttons/GeneralBtn/Index";
 import classes from "./styles.module.scss";
@@ -72,13 +72,40 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     permissions: userPermissions,
   });
   const [fieldErrors, setFieldErrors] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
+    firstName: "",
+    lastName: "",
+    email: "",
   });
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const handleUserInvite = () => {
+  const schema = {
+    firstName: Joi.string().max(50).required().label("First Name"),
+    lastName: Joi.string().max(50).required().label("Last Name"),
+    email: Joi.string().email().required().max(255).label("Email"),
+    isAdmin: Joi.string().max(50).required().label("Role"),
+  };
+
+  // const handleUserInvite = () => {
+  //   let newData = [...userData];
+  //   newData.push(newUser);
+  //   setUserData(newData);
+  //   localStorage.setItem("userData", JSON.stringify(newData));
+  //   toggleInviteModal(false);
+  //   console.log(newUser, newData);
+  // };
+
+  const handleUserInvite = (e) => {
+    e.preventDefault();
+
+    const demoErrors = handleFormValidation();
+
+    setFieldErrors((prevState) => ({
+      ...prevState,
+      ["firstName"]: demoErrors ? demoErrors.firstName : null,
+      ["lastName"]: demoErrors ? demoErrors.lastName : null,
+      ["email"]: demoErrors ? demoErrors.email : null,
+    }));
+
     let newData = [...userData];
     newData.push(newUser);
     setUserData(newData);
@@ -87,37 +114,78 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     console.log(newUser, newData);
   };
 
+  // const handleInputChange = (e) => {
+  //   setNewUser((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  //   handleInputValidation(e);
+  // };
+
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    let errorMessage = handleInputValidation({ name, value });
+
+    if (errorMessage)
+      setFieldErrors((prevState) => ({
+        ...prevState,
+        [name]: errorMessage,
+      }));
+    else
+      setFieldErrors((prevState) => ({
+        ...prevState,
+        [name]: null,
+      }));
+
     setNewUser((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
-    handleInputValidation(e);
   };
 
-  const handleInputValidation = (e) => {
-    if (e.target.value.length === 0) {
-      setFieldErrors((prevState) => ({
-        ...prevState,
-        [e.target.name]: false,
-      }));
-    } else {
-      setFieldErrors((prevState) => ({
-        ...prevState,
-        [e.target.name]: true,
-      }));
-    }
-    handleFormValidation();
+  // const handleInputValidation = (e) => {
+  //   if (e.target.value.length === 0) {
+  //     setFieldErrors((prevState) => ({
+  //       ...prevState,
+  //       [e.target.name]: false,
+  //     }));
+  //   } else {
+  //     setFieldErrors((prevState) => ({
+  //       ...prevState,
+  //       [e.target.name]: true,
+  //     }));
+  //   }
+  //   handleFormValidation();
+  // };
+
+  const handleInputValidation = ({ name, value }) => {
+    let obj = { [name]: value };
+    let demoSchema = { [name]: schema[name] };
+
+    const { error } = Joi.validate(obj, demoSchema);
+
+    return error ? error.details[0].message : null;
   };
+
+  // const handleFormValidation = () => {
+  //   for (const property in fieldErrors) {
+  //     if (!property) {
+  //       return setFormIsValid(false);
+  //     } else {
+  //       setFormIsValid(true);
+  //     }
+  //   }
+  // };
 
   const handleFormValidation = () => {
-    for (const property in fieldErrors) {
-      if (!property) {
-        return setFormIsValid(false);
-      } else {
-        setFormIsValid(true);
-      }
-    }
+    const result = Joi.validate(newUser, schema, { abortEarly: false });
+
+    if (!result.error) return null; setFormIsValid(true)
+
+    const errors = {};
+    for (let item of result.error.details) errors[item.path[0]] = item.message;
+
+    return errors;
   };
 
   return (
@@ -137,7 +205,9 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
             placeholder="* First Name"
             onChange={(e) => handleInputChange(e)}
             className={classes.container_input_firstname}
+            error={fieldErrors.firstName}
           />
+          {fieldErrors && <span>fieldErrors.firstName</span>}
 
           <input
             id="lastName"
@@ -147,6 +217,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
             onChange={(e) => handleInputChange(e)}
             className={classes.container_input_lastName}
           />
+          {fieldErrors && <span>fieldErrors.lastName</span>}
         </div>
         <div className="user-email">
           <input
@@ -157,6 +228,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
             onChange={(e) => handleInputChange(e)}
             className={classes.container_input_email}
           />
+          {fieldErrors && <span>fieldErrors.email</span>}
         </div>
         <div className="user-role">
           <select
