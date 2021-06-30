@@ -39,7 +39,7 @@ const Index = ({ permGroup, onPermissionActiveClick }) => {
       <div className={`${classes.container_treeContent} ${treeOpen ? classes.container_treeContent_open : classes.container_treeContent_closed} `}>
         {data.items.map((item) => {
           return (
-            <div className={classes.permissionWrapper}>
+            <div key={item.id} className={classes.permissionWrapper}>
               <div
                 className={`${classes.indicator} ${item.isActive
                     ? `${classes.indicator_enabled}`
