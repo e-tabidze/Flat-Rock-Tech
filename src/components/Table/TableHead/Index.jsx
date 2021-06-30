@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import ArrowDownActive from "../../../assets/Icons/Arrows/arrow_down-active.svg";
 import ArrowDownInactive from "../../../assets/Icons/Arrows/arrow_down-inactive.svg";
@@ -6,31 +6,96 @@ import ArrowDownInactive from "../../../assets/Icons/Arrows/arrow_down-inactive.
 import classes from "./styles.module.scss";
 
 export default function Index({ userData, setFilteredUserData }) {
+  const [sortByUser, setSortByUser] = useState(null);
+  const [sortByRole, setSortByRole] = useState(null);
+  const [sortByStatus, setSortByStatus] = useState(null);
+
+  const [sortID, setSortID] = useState(0);
+  const [sortLoading, setSortLoading] = useState(true);
+
+  useEffect(() => {
+    if (!sortLoading) {
+      console.log(sortByUser, sortByRole, sortByStatus)
+      handleSortClick();
+    }
+  }, [sortLoading])
+
+  const clearSortings = (id) => {
+    console.log(id);
+    setSortLoading(true);
+    setSortID(id);
+    if (sortByUser !== null) {
+      setSortByUser(!sortByUser);
+      setSortByRole(null);
+      setSortByStatus(null);
+      setSortLoading(false);
+
+    } else if (sortByRole !== null) {
+      setSortByUser(null);
+      setSortByRole(!sortByRole);
+      setSortByStatus(null);
+    } else if (sortByStatus !== null) {
+      setSortByUser(null);
+      setSortByRole(null);
+      setSortByStatus(!sortByStatus);
+    } else {
+      setSortByUser(null);
+      setSortByRole(null);
+      setSortByStatus(null);
+    }
+    setSortLoading(false);
+  }
+
+  const handleSortClick = () => {
+    switch (sortID) {
+      case 1:
+        handleSortByUser()
+        break;
+      case 2:
+        handleSortByRole()
+        break;
+      case 3:
+        handleSortByStatus()
+        break;
+      default:
+        break;
+    }
+  }
+
   const handleSortByUser = () => {
     let asc = [...userData].sort((a, b) =>
       a.firstName > b.firstName ? 1 : -1
     );
-    setFilteredUserData(asc);
+    let desc = [...userData].sort((a, b) =>
+      a.firstName < b.firstName ? 1 : -1
+    );
+    setFilteredUserData(sortByUser ? asc : desc);
   };
 
   const handleSortByRole = () => {
     let sortedByName = [...userData].sort((a, b) =>
       a.firstName < b.firstName ? 1 : -1
     );
-    let sortedData = [...sortedByName].sort((a, b) =>
+    let asc = [...sortedByName].sort((a, b) =>
       a.isAdmin < b.isAdmin ? 1 : -1
     );
-    setFilteredUserData(sortedData);
+    let desc = [...sortedByName].sort((a, b) =>
+      a.isAdmin > b.isAdmin ? 1 : -1
+    );
+    setFilteredUserData(sortByRole ? asc : desc);
   };
 
   const handleSortByStatus = () => {
     let sortedByName = [...userData].sort((a, b) =>
       a.firstName < b.firstName ? 1 : -1
     );
-    let sortedData = [...sortedByName].sort((a, b) =>
+    let asc = [...sortedByName].sort((a, b) =>
       a.isActive < b.isActive ? 1 : -1
     );
-    setFilteredUserData(sortedData);
+    let desc = [...sortedByName].sort((a, b) =>
+      a.isActive < b.isActive ? 1 : -1
+    );
+    setFilteredUserData(sortByStatus ? asc : desc);
   };
 
   return (
@@ -39,7 +104,7 @@ export default function Index({ userData, setFilteredUserData }) {
         <th className={classes.tableHeader_col1}>{/* Vacant Place */}</th>
         <th
           className={classes.tableHeader_col2}
-          onClick={() => handleSortByUser()}
+          onClick={() => clearSortings(1)}
           style={{ textAlign: "left" }}
         >
           <span>USER</span>
@@ -47,14 +112,14 @@ export default function Index({ userData, setFilteredUserData }) {
         </th>
         <th
           className={classes.tableHeader_col3}
-          onClick={() => handleSortByRole()}
+          onClick={() => clearSortings(2)}
         >
           <span>ROLE</span>
           <img src={ArrowDownInactive} alt="" />
         </th>
         <th
           className={classes.tableHeader_col4}
-          onClick={() => handleSortByStatus()}
+          onClick={() => clearSortings(3)}
         >
           <span>STATUS</span>
           <img src={ArrowDownInactive} alt="" />
