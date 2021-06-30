@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Joi from "joi-browser";
 import CloseBtn from "../../../assets/Icons/Actions/close.svg";
 import GeneralButton from "../../Buttons/GeneralBtn/Index";
@@ -62,6 +62,7 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
       ],
     },
   ];
+
   const [newUser, setNewUser] = useState({
     id: userData[userData.length - 1].id + 1,
     firstName: null,
@@ -78,33 +79,19 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
   });
   const [formIsValid, setFormIsValid] = useState(false);
 
+  useEffect(() => {
+    let formValidation = handleFormValidation();
+    setFormIsValid(formValidation ? false : true);
+  }, [fieldErrors]);
+
   const schema = {
     firstName: Joi.string().min(3).max(50).required().label("First Name"),
     lastName: Joi.string().min(3).max(50).required().label("Last Name"),
     email: Joi.string().email().required().max(255).label("Email"),
-    isAdmin: Joi.string().max(50).required().label("Role"),
   };
-
-  // const handleUserInvite = () => {
-  //   let newData = [...userData];
-  //   newData.push(newUser);
-  //   setUserData(newData);
-  //   localStorage.setItem("userData", JSON.stringify(newData));
-  //   toggleInviteModal(false);
-  //   console.log(newUser, newData);
-  // };
 
   const handleUserInvite = (e) => {
     e.preventDefault();
-
-    const demoErrors = handleFormValidation();
-
-    setFieldErrors((prevState) => ({
-      ...prevState,
-      ["firstName"]: demoErrors ? demoErrors.firstName : null,
-      ["lastName"]: demoErrors ? demoErrors.lastName : null,
-      ["email"]: demoErrors ? demoErrors.email : null,
-    }));
 
     let newData = [...userData];
     newData.push(newUser);
@@ -114,49 +101,27 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     console.log(newUser, newData);
   };
 
-  // const handleInputChange = (e) => {
-  //   setNewUser((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  //   handleInputValidation(e);
-  // };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let errorMessage = handleInputValidation({ name, value });
 
-    if (errorMessage)
+    if (errorMessage) {
       setFieldErrors((prevState) => ({
         ...prevState,
         [name]: errorMessage,
       }));
-    else
+    } else {
       setFieldErrors((prevState) => ({
         ...prevState,
         [name]: null,
       }));
+    }
 
     setNewUser((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
-
-  // const handleInputValidation = (e) => {
-  //   if (e.target.value.length === 0) {
-  //     setFieldErrors((prevState) => ({
-  //       ...prevState,
-  //       [e.target.name]: false,
-  //     }));
-  //   } else {
-  //     setFieldErrors((prevState) => ({
-  //       ...prevState,
-  //       [e.target.name]: true,
-  //     }));
-  //   }
-  //   handleFormValidation();
-  // };
 
   const handleInputValidation = ({ name, value }) => {
     let obj = { [name]: value };
@@ -167,18 +132,13 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
     return error ? error.details[0].message : null;
   };
 
-  // const handleFormValidation = () => {
-  //   for (const property in fieldErrors) {
-  //     if (!property) {
-  //       return setFormIsValid(false);
-  //     } else {
-  //       setFormIsValid(true);
-  //     }
-  //   }
-  // };
-
   const handleFormValidation = () => {
-    const result = Joi.validate(newUser, schema, { abortEarly: false });
+    let userToValidate = {
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+    };
+    const result = Joi.validate(userToValidate, schema, { abortEarly: false });
 
     if (!result.error) return null;
     !result.error && setFormIsValid(true);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import Search from "../../components/Search/Index";
-import Pagination from '../../components/Pagination/Index';
-import { paginate } from '../../Utils/paginate';
+import Pagination from "../../components/Pagination/Index";
+import { paginate } from "../../Utils/paginate";
 
 import TableHeader from "../../components/Table/TableHead/Index";
 import TableBody from "../../components/Table/TableBody/Index";
@@ -19,7 +19,9 @@ const Index = ({ dataIsSet }) => {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [inviteModalActive, toggleInviteModal] = useState(false);
 
-  const [pageSize, setPageSize] = useState(4);
+  const pageSize = 4;
+
+  // const [pageSize, setPageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const Index = ({ dataIsSet }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -50,9 +52,7 @@ const Index = ({ dataIsSet }) => {
         <Search data={userData} setFilteredUserData={setFilteredUserData} />
       </div>
       <div className={classes.container_pagebody}>
-        <AddBtn
-          handleClick={toggleInviteModal}
-        />
+        <AddBtn handleClick={toggleInviteModal} />
         <table className={classes.container_usertable}>
           <TableHeader
             userData={filteredUserData}
@@ -65,7 +65,18 @@ const Index = ({ dataIsSet }) => {
             setItemToDelete={setItemToDelete}
           />
         </table>
-        {userData && <Pagination itemsCount={filteredUserData.length} currentPage={currentPage} pageSize={pageSize} onPageChange={handlePageChange} />}
+        <div className={classes.container_pagination}>
+          {userData.length > 4 && <div>Records on page 4</div>}
+
+          {userData && (
+            <Pagination
+              itemsCount={filteredUserData.length}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              onPageChange={handlePageChange}
+            />
+          )}
+        </div>
       </div>
       <div className={classes.container_modal}>
         {itemToDelete && (

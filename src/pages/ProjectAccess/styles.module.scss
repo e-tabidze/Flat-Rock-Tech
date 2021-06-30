@@ -38,4 +38,11 @@
     top: 0;
     left: 0;
   }
+
+  &_pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 100px;
+  }
 }
