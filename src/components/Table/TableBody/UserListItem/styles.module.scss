@@ -8,6 +8,17 @@
     height: 46px;
   }
 
+  &_keyimg {
+    margin-right: 70px;
+    &_active {
+      margin-right: 60px;
+      background-color: #7e7ef1;
+      height: 25px;
+      width: 45px;
+      border-radius: 12px;
+    }
+  }
+
   &_info {
     display: flex;
     flex-direction: column;

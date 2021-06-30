@@ -1,16 +1,16 @@
 .addbtn {
   position: absolute;
-  top: -25px;
+  top: -35px;
   left: 45px;
   background-color: #305eca;
-  border: #305eca;
-  border-radius: 36px;
+  border-radius: 48px;
   height: 72px;
   width: 72px;
   font-size: 36px;
-  padding: 0px;
   color: #ffff;
-  box-shadow: #305eca62 0px 2px 5px 1px;
-  text-align: center;
   line-height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
 }
