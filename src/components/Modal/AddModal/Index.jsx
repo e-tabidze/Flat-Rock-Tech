@@ -53,7 +53,6 @@ const Index = ({ userData, setUserData, toggleInviteModal }) => {
   const handleFormValidation = () => {
     for (const property in fieldErrors) {
       if (!property) {
-        console.log("aeeeee");
         return setFormIsValid(false);
       } else {
         setFormIsValid(true);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import Search from "../../components/Search/Index";
+import Pagination from '../../components/Pagination/Index';
+import { paginate } from '../../Utils/paginate';
 
 import TableHeader from "../../components/Table/TableHead/Index";
 import TableBody from "../../components/Table/TableBody/Index";
@@ -16,6 +18,9 @@ const Index = ({ dataIsSet }) => {
   const [filteredUserData, setFilteredUserData] = useState([]);
   const [itemToDelete, setItemToDelete] = useState(null);
   const [inviteModalActive, toggleInviteModal] = useState(false);
+
+  const [pageSize, setPageSize] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (dataIsSet) handleGetUserData();
@@ -34,6 +39,10 @@ const Index = ({ dataIsSet }) => {
     }
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  }
+
   return (
     <div className={classes.container}>
       <div className={classes.container_header}>
@@ -50,12 +59,13 @@ const Index = ({ dataIsSet }) => {
             setFilteredUserData={setFilteredUserData}
           />
           <TableBody
-            tableData={filteredUserData}
+            tableData={paginate(filteredUserData, currentPage, pageSize)}
             setFilteredUserData={setFilteredUserData}
             userData={userData}
             setItemToDelete={setItemToDelete}
           />
         </table>
+        {userData && <Pagination itemsCount={filteredUserData.length} currentPage={currentPage} pageSize={pageSize} onPageChange={handlePageChange} />}
       </div>
       <div className={classes.container_modal}>
         {itemToDelete && (
