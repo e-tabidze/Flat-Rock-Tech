@@ -121,8 +121,8 @@ export default function Index({ userData, setFilteredUserData }) {
           <span>STATUS</span>
           <img src={ArrowDownInactive} alt="" />
         </th>
-        <th className={classes.tableHeader_col5}>
-          <span>ACTIONS</span>
+        <th>
+          <div>ACTIONS</div>
         </th>
       </tr>
     </thead>
